@@ -1,59 +1,110 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Page de contact</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: linear-gradient(to right, #00c6ff, #0072ff);
-            color: white;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .contact-form {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.3);
-            width: 400px;
-        }
-        .contact-form h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .contact-form input, .contact-form textarea {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border: none;
-            border-radius: 5px;
-        }
-        .contact-form button {
-            width: 100%;
-            padding: 12px;
-            background-color: white;
-            color: #0072ff;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .contact-form button:hover {
-            background-color: #f0f0f0;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Contact Us</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(135deg, #ff0055, #ff3385);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .contact-box {
+      background-color: #2c2c2c;
+      color: white;
+      width: 700px;
+      padding: 40px;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .left {
+      width: 40%;
+    }
+
+    .left h2 {
+      color: #ff4081;
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .left p {
+      font-size: 13px;
+      color: #bbb;
+    }
+
+    .right {
+      width: 55%;
+    }
+
+    .right input,
+    .right textarea {
+      width: 100%;
+      margin-bottom: 15px;
+      padding: 10px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid #666;
+      color: white;
+      font-size: 14px;
+    }
+
+    .right input::placeholder,
+    .right textarea::placeholder {
+      color: #777;
+    }
+
+    .right .btns {
+      display: flex;
+      justify-content: flex-end;
+      gap: 20px;
+    }
+
+    .right button {
+      background: none;
+      border: none;
+      color: #ff4081;
+      font-weight: bold;
+      font-size: 14px;
+      cursor: pointer;
+      transition: color 0.3s;
+    }
+
+    .right button:hover {
+      color: #fff;
+    }
+  </style>
 </head>
 <body>
-    <form class="contact-form">
-        <h2>Contactez-nous</h2>
-        <input type="text" name="nom" placeholder="Votre nom" required>
-        <input type="text" name="prenom" placeholder="Votre prénom" required>
-        <textarea name="message" rows="5" placeholder="Votre message..." required></textarea>
-        <button type="submit">Envoyer</button>
-    </form>
+  <div class="contact-box">
+    <div class="left">
+      <h2>CONTACT<br>US</h2>
+      <p>CONTACT INFO : +62 81 316 328 505</p>
+    </div>
+    <div class="right">
+      <form>
+        <input type="text" placeholder="KRISANTUS WANANDI" disabled>
+        <input type="email" placeholder="EMAIL" required>
+        <input type="text" placeholder="CONTACT NO" required>
+        <textarea rows="3" placeholder="MESSAGE" required></textarea>
+        <div class="btns">
+          <button type="reset">CANCEL</button>
+          <button type="submit">SEND</button>
+        </div>
+      </form>
+    </div>
+  </div>
 </body>
 </html>
