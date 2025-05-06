@@ -30,6 +30,33 @@ def mongraphique():
 @app.route("/histogramme/")
 def newgraphique():
     return render_template("histogramme.html")
+
+@app.route("/commits/")
+def commits():
+    url = "https://api.github.com/repos/Anne0104/5MCSI_Metriques/commits"
+    response = requests.get(url)
+    data = response.json()
+
+    from collections import Counter
+    minutes = []
+
+    for commit in data:
+        try:
+            date_str = commit['commit']['author']['date']
+            date_obj = datetime.strptime(date_str, '%Y-%m-%dT%H:%M:%SZ')
+            minutes.append(date_obj.minute)
+        except:
+            continue
+
+    # Compter les commits par minute
+    minute_counts = Counter(minutes)
+    sorted_minutes = sorted(minute_counts.items())
+
+    labels = [f"{minute:02d}" for minute, _ in sorted_minutes]
+    values = [count for _, count in sorted_minutes]
+
+    return render_template("commits.html", labels=labels, values=values)
+
                                                                                                                                        
 @app.route('/')
 def hello_world():
