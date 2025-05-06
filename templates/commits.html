@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Commits GitHub</title>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+      google.charts.load("current", { packages: ["corechart"] });
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn("string", "Minute");
+        data.addColumn("number", "Commits");
+
+        const labels = {{ labels|tojson }};
+        const values = {{ values|tojson }};
+
+        for (let i = 0; i < labels.length; i++) {
+          data.addRow([labels[i], values[i]]);
+        }
+
+        var options = {
+          title: "Nombre de Commits GitHub par Minute",
+          hAxis: { title: "Minute (00 à 59)" },
+          vAxis: { title: "Commits" },
+          legend: "none",
+          colors: ["#ff4081"],
+          backgroundColor: "#1e1e1e",
+          titleTextStyle: { color: "#fff" },
+          hAxis: { textStyle: { color: "#fff" }, titleTextStyle: { color: "#fff" }},
+          vAxis: { textStyle: { color: "#fff" }, titleTextStyle: { color: "#fff" }}
+        };
+
+        var chart = new google.visualization.ColumnChart(
+          document.getElementById("chart_div")
+        );
+        chart.draw(data, options);
+      }
+    </script>
+  </head>
+  <body style="background-color: #1e1e1e; color: white; font-family: Arial, sans-serif;">
+    <h2 style="text-align: center; margin-top: 30px;">Graphique des Commits (par minute)</h2>
+    <div id="chart_div" style="width: 900px; height: 500px; margin: 50px auto;"></div>
+  </body>
+</html>
