@@ -36,16 +36,14 @@ def newgraphique():
 
 @app.route("/commits/")
 def commits():
-    url = "https://api.github.com/repos/Anne0104/5MCSI_Metriques/commits"
-    response = requests.get(url)
-
-    if response.status_code != 200:
-        return f"Erreur API GitHub : {response.status_code}"
-
+    url = "https://api.github.com/repos/Anne0104/5MCSI_Metriques/commits?per_page=20"
     try:
+        response = requests.get(url, timeout=5)
+        if response.status_code != 200:
+            return f"Erreur API GitHub : {response.status_code}"
         data = response.json()
-    except:
-        return "Erreur lors du décodage JSON"
+    except Exception as e:
+        return f"Erreur lors de la récupération des commits : {str(e)}"
 
     minutes = []
     for commit in data:
@@ -56,6 +54,7 @@ def commits():
         except:
             continue
 
+    from collections import Counter
     minute_counts = Counter(minutes)
     sorted_minutes = sorted(minute_counts.items())
 
@@ -63,6 +62,7 @@ def commits():
     values = [count for _, count in sorted_minutes]
 
     return render_template("commits.html", labels=labels, values=values)
+
 
                                                                                                                                        
 @app.route('/')
