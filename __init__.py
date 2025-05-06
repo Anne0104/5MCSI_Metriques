@@ -2,8 +2,11 @@ from flask import Flask, render_template_string, render_template, jsonify
 from flask import render_template
 from flask import json
 from datetime import datetime
+from collections import Counter
+from datetime import datetime
 from urllib.request import urlopen
 import sqlite3
+import requests
                                                                                                                                        
 app = Flask(__name__)  
 
@@ -35,11 +38,16 @@ def newgraphique():
 def commits():
     url = "https://api.github.com/repos/Anne0104/5MCSI_Metriques/commits"
     response = requests.get(url)
-    data = response.json()
 
-    from collections import Counter
+    if response.status_code != 200:
+        return f"Erreur API GitHub : {response.status_code}"
+
+    try:
+        data = response.json()
+    except:
+        return "Erreur lors du décodage JSON"
+
     minutes = []
-
     for commit in data:
         try:
             date_str = commit['commit']['author']['date']
@@ -48,7 +56,6 @@ def commits():
         except:
             continue
 
-    # Compter les commits par minute
     minute_counts = Counter(minutes)
     sorted_minutes = sorted(minute_counts.items())
 
